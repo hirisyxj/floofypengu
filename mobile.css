@@ -1,0 +1,384 @@
+/* mobile.css — loaded on phones/tablets via JS detection in <head> */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-size: 18px;
+}
+
+.wrapper {
+  padding: 22px 16px 56px;
+  max-width: 100%;
+  text-align: center;
+}
+
+/* Hero */
+.hero {
+  grid-template-columns: 1fr !important;
+  justify-items: center !important;
+  gap: 22px;
+  margin-bottom: 18px;
+}
+.artwork-section {
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px;
+  width: 100%;
+}
+.artwork-frame {
+  width: 248px;
+}
+.artwork-switcher {
+  flex-direction: row !important;
+  justify-content: center !important;
+  gap: 6px;
+  max-width: 100%;
+}
+.artwork-thumb {
+  min-width: 96px;
+  padding: 6px 11px;
+  gap: 0;
+}
+.artwork-thumb-label {
+  font-size: 10px;
+}
+
+.hero-info {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px;
+  padding-top: 0;
+}
+.hero-epithet {
+  text-align: center !important;
+  width: 100%;
+  font-size: 12px;
+}
+.hero-name {
+  text-align: center !important;
+  width: 100%;
+  font-size: clamp(24px, 7vw, 34px) !important;
+}
+
+.profile-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 5px;
+  width: 100%;
+}
+.profile-aboutme {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  text-align: center !important;
+  font-size: 18px;
+  line-height: 1.75;
+}
+.profile-aboutme::before {
+  display: none !important;
+}
+.profile-socials {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 5px;
+  width: 100%;
+}
+.social-link {
+  width: 34px;
+  height: 34px;
+}
+.social-link[data-label]::after {
+  display: none;
+}
+.profile-updated {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.tab-panel,
+.content-section,
+.role-group,
+.lodestone-footer,
+.gpose-grid,
+#jobs-role-groups {
+  width: 100%;
+}
+
+.content-section-header,
+.role-header {
+  justify-content: center;
+}
+
+.content-card,
+.fc-meta-item,
+.fc-tag-badge {
+  text-align: center;
+}
+
+.card-badges,
+.fc-meta {
+  justify-content: center;
+}
+
+/* Free Company */
+.fc-card {
+  grid-template-columns: 1fr !important;
+  justify-items: center !important;
+  padding: 16px 14px;
+  margin-bottom: 18px;
+  gap: 12px;
+}
+.fc-emblem {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100%;
+  gap: 6px;
+}
+.fc-emblem-icon {
+  width: 52px;
+  height: 52px;
+}
+.fc-info {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100%;
+  text-align: center;
+}
+.fc-overline {
+  text-align: center !important;
+  width: 100%;
+}
+.fc-name {
+  text-align: center !important;
+  width: 100%;
+  font-size: 20px !important;
+  margin-bottom: 4px !important;
+}
+.fc-tag-badge {
+  text-align: center !important;
+}
+.fc-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Tabs */
+.tab-nav {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar {
+  display: none;
+}
+.tab-btn {
+  padding: 12px 14px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 44px;
+}
+.tab-btn.active {
+  box-shadow: inset 0 -1px 0 var(--ember);
+  background: rgba(208, 85, 53, 0.08);
+}
+
+.profile-tag,
+.pref-job-tag span {
+  font-size: 13px;
+}
+
+/* Jobs */
+.jobs-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+}
+.job-name {
+  font-size: 10px;
+}
+.job-level {
+  font-size: 14px;
+  min-width: 20px;
+}
+.job-icon {
+  width: 24px;
+  height: 24px;
+}
+.role-group {
+  margin-bottom: 18px;
+}
+.role-header {
+  margin-bottom: 6px;
+}
+
+/* Content */
+.content-grid {
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
+.content-card {
+  padding: 14px 14px;
+}
+.card-badges {
+  width: 100%;
+}
+.card-name {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.card-tier {
+  font-size: 10px;
+}
+
+.content-section-title {
+  font-size: 11px;
+}
+.content-section-line {
+  opacity: 0.18;
+}
+
+.content-section {
+  margin-bottom: 20px;
+}
+.content-section-header {
+  margin-bottom: 8px;
+}
+
+/* GPose */
+.gpose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.gpose-grid.gpose-grid-empty {
+  min-height: 140px;
+}
+.gpose-empty {
+  white-space: normal;
+  max-width: 22ch;
+  margin: 0 auto;
+  line-height: 1.5;
+  padding: 40px 14px;
+  font-size: 13px;
+}
+.gpose-empty-lead,
+.gpose-empty-tail {
+  display: block;
+}
+.gpose-empty-separator {
+  display: none;
+}
+
+.lore-grid {
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.lore-card {
+  padding: 12px 12px;
+}
+
+.lore-card-summary {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-outer {
+  flex-direction: column;
+  gap: 8px;
+  max-width: 100%;
+  width: 100%;
+}
+.lightbox-outer > .lightbox-nav {
+  display: none;
+}
+.lightbox {
+  max-height: 90dvh;
+  border-radius: 0;
+  width: 100%;
+}
+.lightbox-close {
+  top: 12px;
+  right: 12px;
+}
+.lightbox-img-wrap {
+  max-height: 90dvh;
+}
+
+/* Misc */
+.lodestone-footer {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 10px;
+}
+
+.footer-left {
+  order: 2;
+}
+
+.footer-right {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  order: 1;
+}
+
+.footer-follow-text {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.footer-follow-text::after {
+  width: 10px;
+  margin-left: 6px;
+}
+
+.footer-copyright {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.lodestone-actions {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  gap: 6px;
+  border-radius: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

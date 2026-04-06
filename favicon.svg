@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Floofy Pengu favicon">
+  <rect width="64" height="64" rx="16" fill="#100d0e"/>
+  <circle cx="32" cy="32" r="22" fill="#1c1618" stroke="#d05535" stroke-width="2"/>
+  <path d="M32 16l4.7 11.3L48 32l-11.3 4.7L32 48l-4.7-11.3L16 32l11.3-4.7L32 16Z" fill="#f08860"/>
+  <circle cx="32" cy="32" r="3.5" fill="#ede0cc"/>
+</svg>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floofy Pengu</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="favicon.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mobile.css" media="(max-width: 768px)" />
+    <script
+      src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <canvas id="ember-canvas"></canvas>
+    <div class="music-controls" id="music-controls" style="display: none">
+      <button
+        class="music-toggle"
+        id="music-toggle"
+        type="button"
+        aria-pressed="false"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <iconify-icon icon="mdi:music" aria-hidden="true"></iconify-icon>
+        <span class="sr-only">Play music</span>
+      </button>
+      <div class="music-volume-popover" id="music-volume-popover">
+        <input
+          class="music-volume"
+          id="music-volume"
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          value="20"
+          aria-label="Music volume"
+        />
+      </div>
+    </div>
+    <audio id="bg-music" loop preload="none"></audio>
+
+    <div class="wrapper">
+      <div class="hero">
+        <div class="artwork-section">
+          <div class="artwork-frame">
+            <img id="artwork-img" src="" alt="" style="display: none" />
+            <div class="artwork-empty" id="artwork-empty">
+              <iconify-icon
+                icon="mdi:image-off-outline"
+                aria-hidden="true"
+              ></iconify-icon>
+              <span>Add artwork in script.js</span>
+            </div>
+            <div class="frame-accent-tr"></div>
+            <div class="frame-accent-bl"></div>
+          </div>
+          <div class="artwork-switcher" id="artwork-dots"></div>
+        </div>
+
+        <div class="hero-info">
+          <div class="hero-epithet" id="disp-title" style="display: none"></div>
+          <h1 class="hero-name" id="disp-name">Your Character</h1>
+          <div class="profile-tags" id="disp-tags" style="display: none"></div>
+          <div
+            class="profile-aboutme"
+            id="disp-aboutme"
+            style="display: none"
+          ></div>
+        </div>
+      </div>
+
+      <a
+        class="fc-card fc-link"
+        id="fc-link"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="fc-emblem">
+          <div class="fc-emblem-icon" id="fc-icon"></div>
+          <div class="fc-tag-badge" id="fc-tag"></div>
+        </div>
+        <div class="fc-info">
+          <div class="fc-overline">Free Company</div>
+          <div class="fc-name" id="fc-name"></div>
+          <div class="fc-meta" id="fc-meta"></div>
+        </div>
+      </a>
+
+      <nav class="tab-nav" id="tab-nav">
+        <button class="tab-btn active" data-tab="jobs">
+          <iconify-icon
+            icon="mdi:star-four-points"
+            aria-hidden="true"
+          ></iconify-icon>
+          Jobs
+        </button>
+        <button class="tab-btn" data-tab="raids">
+          <iconify-icon
+            icon="mdi:shield-star-outline"
+            aria-hidden="true"
+          ></iconify-icon>
+          Content
+        </button>
+        <button class="tab-btn" data-tab="gpose">
+          <iconify-icon icon="mdi:image-area" aria-hidden="true"></iconify-icon>
+          GPose
+        </button>
+        <button class="tab-btn" data-tab="lore">
+          <iconify-icon
+            icon="mdi:book-open-variant"
+            aria-hidden="true"
+          ></iconify-icon>
+          Lore
+        </button>
+      </nav>
+      <div class="tab-underline">
+        <div class="tab-indicator" id="tab-indicator"></div>
+      </div>
+
+      <div class="tab-panel active" id="panel-jobs">
+        <div id="jobs-role-groups"></div>
+      </div>
+
+      <div class="tab-panel" id="panel-raids">
+        <div class="content-section" id="section-ultimate"></div>
+        <div class="content-section" id="section-savage"></div>
+        <div class="content-section" id="section-chaotic"></div>
+        <div class="content-section" id="section-extreme"></div>
+        <div class="content-section" id="section-variant"></div>
+        <div class="content-section" id="section-deep"></div>
+      </div>
+
+      <div class="tab-panel" id="panel-gpose">
+        <div class="gpose-grid" id="gpose-grid"></div>
+      </div>
+
+      <div class="tab-panel" id="panel-lore">
+        <div class="lore-grid" id="lore-grid"></div>
+      </div>
+
+      <div class="lodestone-footer">
+        <div class="footer-left">
+          <div class="footer-copyright">© 2026 Floofy Pengu</div>
+        </div>
+        <div class="footer-right">
+          <div class="footer-follow-text">Follow me</div>
+          <div class="lodestone-actions">
+            <div
+              class="profile-socials"
+              id="disp-socials"
+              style="display: none"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="lightbox-overlay"
+      id="lightbox-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Photo viewer"
+    >
+      <div class="lightbox-outer">
+        <button class="lightbox-nav" id="lb-prev" aria-label="Previous">
+          <iconify-icon
+            icon="mdi:chevron-left"
+            aria-hidden="true"
+          ></iconify-icon>
+        </button>
+        <div class="lightbox" id="lightbox">
+          <div class="lightbox-img-wrap">
+            <img id="lb-img" src="" alt="" />
+          </div>
+        </div>
+        <button class="lightbox-close" id="lb-close" aria-label="Close">
+          <iconify-icon icon="mdi:close" aria-hidden="true"></iconify-icon>
+        </button>
+        <button class="lightbox-nav" id="lb-next" aria-label="Next">
+          <iconify-icon
+            icon="mdi:chevron-right"
+            aria-hidden="true"
+          ></iconify-icon>
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
