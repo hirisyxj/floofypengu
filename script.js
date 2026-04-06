@@ -1,4 +1,10 @@
 //Site Data
+const mobileUaPattern =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+const isMobileDevice =
+  navigator.userAgentData?.mobile === true ||
+  mobileUaPattern.test(navigator.userAgent || "");
+
 const SITE_DATA = {
   profile: {
     name: "Floofy Pengu",
@@ -977,6 +983,166 @@ function initLightbox() {
   $id("lightbox-overlay").addEventListener("click", (e) => {
     if (e.target === $id("lightbox-overlay")) closeLightbox();
   });
+
+  if (isMobileDevice) {
+    const mobileLightbox = $id("lightbox");
+    const mobileImage = $id("lb-img");
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let dragActive = false;
+    let pinchActive = false;
+    let pinchStartDistance = 0;
+    let pinchStartScale = 1;
+    let mobileZoomScale = 1;
+    let panStartX = 0;
+    let panStartY = 0;
+    let panX = 0;
+    let panY = 0;
+    let panActive = false;
+
+    const clampZoom = (value) => Math.max(1, Math.min(4, value));
+    const clampPan = () => {
+      const viewportWidth =
+        window.innerWidth || document.documentElement.clientWidth;
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+      const maxPanX = ((mobileZoomScale - 1) * viewportWidth) / 2;
+      const maxPanY = ((mobileZoomScale - 1) * viewportHeight) / 2;
+      panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+      panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+    };
+
+    const applyZoom = (scale) => {
+      mobileZoomScale = clampZoom(scale);
+      mobileImage.style.transformOrigin = "center center";
+      clampPan();
+      mobileImage.style.transform = `translate(${panX}px, ${panY}px) scale(${mobileZoomScale})`;
+    };
+
+    const resetMobileLightbox = () => {
+      mobileLightbox.style.transition =
+        "transform 180ms ease, opacity 180ms ease";
+      mobileLightbox.style.transform = "";
+      mobileLightbox.style.opacity = "";
+      panX = 0;
+      panY = 0;
+      panActive = false;
+      applyZoom(1);
+    };
+
+    const touchDistance = (touches) => {
+      const [a, b] = touches;
+      return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+    };
+
+    mobileLightbox.addEventListener(
+      "touchstart",
+      (e) => {
+        if (e.touches.length === 2) {
+          pinchActive = true;
+          dragActive = false;
+          panActive = false;
+          pinchStartDistance = touchDistance(e.touches);
+          pinchStartScale = mobileZoomScale;
+          mobileLightbox.style.transition = "none";
+          mobileImage.style.transition = "none";
+          return;
+        }
+
+        if (mobileZoomScale > 1.05) {
+          panActive = true;
+          dragActive = false;
+          panStartX = e.touches[0].clientX - panX;
+          panStartY = e.touches[0].clientY - panY;
+          mobileImage.style.transition = "none";
+          return;
+        }
+
+        dragStartX = e.touches[0].clientX;
+        dragStartY = e.touches[0].clientY;
+        dragActive = true;
+        panActive = false;
+        mobileLightbox.style.transition = "none";
+      },
+      { passive: true },
+    );
+
+    mobileLightbox.addEventListener(
+      "touchmove",
+      (e) => {
+        if (pinchActive && e.touches.length === 2) {
+          const nextScale =
+            pinchStartScale * (touchDistance(e.touches) / pinchStartDistance);
+          applyZoom(nextScale);
+          e.preventDefault();
+          return;
+        }
+
+        if (panActive && e.touches.length === 1) {
+          panX = e.touches[0].clientX - panStartX;
+          panY = e.touches[0].clientY - panStartY;
+          clampPan();
+          mobileImage.style.transform = `translate(${panX}px, ${panY}px) scale(${mobileZoomScale})`;
+          e.preventDefault();
+          return;
+        }
+
+        if (!dragActive) return;
+        const touch = e.touches[0];
+        const dx = touch.clientX - dragStartX;
+        const dy = touch.clientY - dragStartY;
+        const distance = Math.hypot(dx, dy);
+        const progress = Math.min(1, distance / 120);
+        mobileLightbox.style.transform = `translate(${dx * 0.2}px, ${dy * 0.2}px) scale(${1 - progress * 0.1})`;
+        mobileLightbox.style.opacity = String(1 - progress * 0.9);
+        if (distance > 3) e.preventDefault();
+      },
+      { passive: false },
+    );
+
+    mobileLightbox.addEventListener(
+      "touchend",
+      (e) => {
+        if (pinchActive && e.touches.length < 2) {
+          pinchActive = false;
+          mobileImage.style.transition = "transform 180ms ease";
+          applyZoom(mobileZoomScale);
+          if (mobileZoomScale <= 1.05) {
+            resetMobileLightbox();
+          }
+          return;
+        }
+
+        if (panActive) {
+          panActive = false;
+          mobileImage.style.transition = "transform 180ms ease";
+          applyZoom(mobileZoomScale);
+          return;
+        }
+
+        if (!dragActive) return;
+        dragActive = false;
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - dragStartX;
+        const dy = touch.clientY - dragStartY;
+        const shouldClose = Math.hypot(dx, dy) > 70;
+        if (shouldClose) {
+          closeLightbox();
+          return;
+        }
+        resetMobileLightbox();
+      },
+      { passive: true },
+    );
+
+    mobileLightbox.addEventListener("touchcancel", () => {
+      dragActive = false;
+      resetMobileLightbox();
+    });
+
+    return;
+  }
+
   $id("lb-prev").addEventListener("click", (e) => {
     e.stopPropagation();
     if (lbIndex > 0) {
