@@ -294,7 +294,7 @@ function getSocialIcon(label) {
   return SOCIAL_ICONS.default;
 }
 
-// Tabs 
+// Tabs
 function initTabs() {
   const buttons = document.querySelectorAll(".tab-btn");
   const panels = document.querySelectorAll(".tab-panel");
@@ -537,9 +537,12 @@ function initMusic() {
   let volume = Math.min(1, Math.max(0, Number(MUSIC_DATA.volume ?? 0.2)));
 
   try {
-    const savedVolume = Number(localStorage.getItem(volumeKey));
-    if (!Number.isNaN(savedVolume)) {
-      volume = Math.min(1, Math.max(0, savedVolume));
+    const saved = localStorage.getItem(volumeKey);
+    if (saved !== null) {
+      const savedVolume = Number(saved);
+      if (!Number.isNaN(savedVolume)) {
+        volume = Math.min(1, Math.max(0, savedVolume));
+      }
     }
   } catch {
     // Ignore storage access errors
@@ -554,6 +557,10 @@ function initMusic() {
     slider.style.setProperty("--volume-level", `${level}%`);
   };
   updateSliderVisual(volume);
+  // Force visual refresh on load
+  requestAnimationFrame(() => {
+    updateSliderVisual(volume);
+  });
 
   controls.style.display = "inline-flex";
 
@@ -852,7 +859,7 @@ function renderContent() {
   });
 }
 
-// Free Company 
+// Free Company
 function renderFC() {
   const fc = FC_DATA;
   const fcLink = document.querySelector(".fc-link");
