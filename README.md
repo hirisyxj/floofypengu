@@ -4,7 +4,7 @@ Welcome to my little corner of Eorzea.
 
 ## 🌐 Live Site
 
-https://floofypengu.pages.dev/
+[floofypengu.pages.dev](https://floofypengu.pages.dev/)
 
 ## 🧩 What Is In This Site?
 
