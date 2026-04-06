@@ -150,9 +150,7 @@ const SITE_DATA = {
     defaultEnabled: false,
     volume: 0.2,
   },
-  gpose: [
-    // { src: "gpose/" },
-  ],
+  gpose: [{ src: "gpose/ffxiv_dx11 2025-02-18 00-16-31 Ice Cream Cake.png" }],
 };
 
 const PROFILE_DATA = SITE_DATA.profile;
