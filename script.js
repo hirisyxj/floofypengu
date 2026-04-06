@@ -7,7 +7,7 @@ const SITE_DATA = {
     mbti: "INFP",
     lastUpdated: "Apr 6, 2026",
     aboutMe:
-      "I started playing FFXIV during Shadowbringers (peak), and I like to fantasia into my different OCs, so my name doesn’t represent them directly. I enjoy fishing, raiding, and hanging out at social events in FFXIV. Outside of the game, I dabble in tech, crafts, and a little street photography! You can read more about my OCs when I update my lore section sometime in the future.",
+      "Started in Shadowbringers and got completely hooked. I fantasia between OCs a lot, so the name you see isn’t always who I’m currently playing. You’ll usually find me fishing, raiding, or vibing at social spots around Eorzea. Outside the game, I’m into tech, crafts, and street photography. You can read about my OCs when I get around to writing and updating the lore section.",
     socials: [{ label: "X", url: "https://x.com/penguxiv" }],
   },
   ocLores: [
@@ -299,9 +299,9 @@ function initTabs() {
   const buttons = document.querySelectorAll(".tab-btn");
   const panels = document.querySelectorAll(".tab-panel");
   const indicator = $id("tab-indicator");
+  const nav = $id("tab-nav");
 
   function moveIndicator(btn) {
-    const nav = $id("tab-nav");
     indicator.style.left =
       btn.getBoundingClientRect().left -
       nav.getBoundingClientRect().left +
