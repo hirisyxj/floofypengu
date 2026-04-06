@@ -50,7 +50,7 @@ This repo is connected to Cloudflare Pages.
 2. Commit and push to main
 3. Cloudflare auto-deploys
 
-## 🪪 Credits
+## 🙏 Credits
 
 - Job icons: xivapi/classjob-icons CDN
 - Icons: Iconify
