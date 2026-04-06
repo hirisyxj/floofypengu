@@ -348,10 +348,6 @@ body {
   height: 100%;
   object-fit: contain;
   display: block;
-  transform-origin: center center;
-  will-change: transform;
-  user-select: none;
-  -webkit-user-drag: none;
 }
 
 /* Misc */

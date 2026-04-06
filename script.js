@@ -518,11 +518,6 @@ function renderOcLore() {
 
 // Music
 function initMusic() {
-  const mobileUaPattern =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-  const isMobileDevice =
-    navigator.userAgentData?.mobile === true ||
-    mobileUaPattern.test(navigator.userAgent || "");
   if (isMobileDevice) return;
 
   const controls = $id("music-controls");
@@ -910,6 +905,12 @@ function renderFC() {
 
 // GPose / Lightbox
 let lbIndex = 0;
+let lbClosing = false;
+let lbFadeTimer = 0;
+const LB_OPEN_FADE_MS = 280;
+const LB_CLOSE_FADE_MS = 270;
+const MOBILE_SWIPE_THRESHOLD = 70;
+const MOBILE_SWIPE_DISTANCE = 120;
 
 function renderGpose() {
   const grid = $id("gpose-grid");
@@ -947,13 +948,46 @@ function renderGpose() {
 function openLightbox(index) {
   lbIndex = index;
   updateLightbox();
-  $id("lightbox-overlay").classList.add("active");
+  const overlay = $id("lightbox-overlay");
+  const lightbox = $id("lightbox");
+  window.clearTimeout(lbFadeTimer);
+  lbClosing = false;
+  overlay.classList.add("active");
+  overlay.style.opacity = "0";
+  overlay.style.transition = `opacity ${LB_OPEN_FADE_MS}ms ease`;
+  lightbox.style.opacity = "0";
+  lightbox.style.transform = "scale(0.94)";
+  lightbox.style.transition = `opacity ${LB_OPEN_FADE_MS}ms ease, transform ${LB_OPEN_FADE_MS}ms cubic-bezier(0.22, 0.61, 0.36, 1)`;
+  requestAnimationFrame(() => {
+    overlay.style.opacity = "1";
+    lightbox.style.opacity = "1";
+    lightbox.style.transform = "scale(1)";
+  });
   document.body.style.overflow = "hidden";
 }
 
 function closeLightbox() {
-  $id("lightbox-overlay").classList.remove("active");
-  document.body.style.overflow = "";
+  const overlay = $id("lightbox-overlay");
+  const lightbox = $id("lightbox");
+  if (!overlay.classList.contains("active") || lbClosing) return;
+
+  lbClosing = true;
+  overlay.style.transition = `opacity ${LB_CLOSE_FADE_MS}ms ease`;
+  lightbox.style.transition = `opacity ${LB_CLOSE_FADE_MS}ms ease, transform ${LB_CLOSE_FADE_MS}ms cubic-bezier(0.22, 0.61, 0.36, 1)`;
+  overlay.style.opacity = "0";
+  lightbox.style.opacity = "0";
+  lightbox.style.transform = "scale(0.96)";
+  window.clearTimeout(lbFadeTimer);
+  lbFadeTimer = window.setTimeout(() => {
+    overlay.classList.remove("active");
+    overlay.style.opacity = "";
+    overlay.style.transition = "";
+    lightbox.style.opacity = "";
+    lightbox.style.transition = "";
+    lightbox.style.transform = "";
+    document.body.style.overflow = "";
+    lbClosing = false;
+  }, LB_CLOSE_FADE_MS);
 }
 
 function updateLightbox() {
@@ -986,82 +1020,28 @@ function initLightbox() {
 
   if (isMobileDevice) {
     const mobileLightbox = $id("lightbox");
-    const mobileImage = $id("lb-img");
     let dragStartX = 0;
     let dragStartY = 0;
     let dragActive = false;
-    let pinchActive = false;
-    let pinchStartDistance = 0;
-    let pinchStartScale = 1;
-    let mobileZoomScale = 1;
-    let panStartX = 0;
-    let panStartY = 0;
-    let panX = 0;
-    let panY = 0;
-    let panActive = false;
-
-    const clampZoom = (value) => Math.max(1, Math.min(4, value));
-    const clampPan = () => {
-      const viewportWidth =
-        window.innerWidth || document.documentElement.clientWidth;
-      const viewportHeight =
-        window.innerHeight || document.documentElement.clientHeight;
-      const maxPanX = ((mobileZoomScale - 1) * viewportWidth) / 2;
-      const maxPanY = ((mobileZoomScale - 1) * viewportHeight) / 2;
-      panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
-      panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
-    };
-
-    const applyZoom = (scale) => {
-      mobileZoomScale = clampZoom(scale);
-      mobileImage.style.transformOrigin = "center center";
-      clampPan();
-      mobileImage.style.transform = `translate(${panX}px, ${panY}px) scale(${mobileZoomScale})`;
-    };
 
     const resetMobileLightbox = () => {
       mobileLightbox.style.transition =
-        "transform 180ms ease, opacity 180ms ease";
-      mobileLightbox.style.transform = "";
+        "opacity 180ms ease, transform 180ms cubic-bezier(0.22, 0.61, 0.36, 1)";
       mobileLightbox.style.opacity = "";
-      panX = 0;
-      panY = 0;
-      panActive = false;
-      applyZoom(1);
+      mobileLightbox.style.transform = "scale(1)";
     };
 
-    const touchDistance = (touches) => {
-      const [a, b] = touches;
-      return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
-    };
+    mobileLightbox.addEventListener("click", () => {
+      if (dragActive) return;
+      closeLightbox();
+    });
 
     mobileLightbox.addEventListener(
       "touchstart",
       (e) => {
-        if (e.touches.length === 2) {
-          pinchActive = true;
-          dragActive = false;
-          panActive = false;
-          pinchStartDistance = touchDistance(e.touches);
-          pinchStartScale = mobileZoomScale;
-          mobileLightbox.style.transition = "none";
-          mobileImage.style.transition = "none";
-          return;
-        }
-
-        if (mobileZoomScale > 1.05) {
-          panActive = true;
-          dragActive = false;
-          panStartX = e.touches[0].clientX - panX;
-          panStartY = e.touches[0].clientY - panY;
-          mobileImage.style.transition = "none";
-          return;
-        }
-
         dragStartX = e.touches[0].clientX;
         dragStartY = e.touches[0].clientY;
         dragActive = true;
-        panActive = false;
         mobileLightbox.style.transition = "none";
       },
       { passive: true },
@@ -1070,30 +1050,12 @@ function initLightbox() {
     mobileLightbox.addEventListener(
       "touchmove",
       (e) => {
-        if (pinchActive && e.touches.length === 2) {
-          const nextScale =
-            pinchStartScale * (touchDistance(e.touches) / pinchStartDistance);
-          applyZoom(nextScale);
-          e.preventDefault();
-          return;
-        }
-
-        if (panActive && e.touches.length === 1) {
-          panX = e.touches[0].clientX - panStartX;
-          panY = e.touches[0].clientY - panStartY;
-          clampPan();
-          mobileImage.style.transform = `translate(${panX}px, ${panY}px) scale(${mobileZoomScale})`;
-          e.preventDefault();
-          return;
-        }
-
         if (!dragActive) return;
         const touch = e.touches[0];
         const dx = touch.clientX - dragStartX;
         const dy = touch.clientY - dragStartY;
         const distance = Math.hypot(dx, dy);
         const progress = Math.min(1, distance / 120);
-        mobileLightbox.style.transform = `translate(${dx * 0.2}px, ${dy * 0.2}px) scale(${1 - progress * 0.1})`;
         mobileLightbox.style.opacity = String(1 - progress * 0.9);
         if (distance > 3) e.preventDefault();
       },
@@ -1103,23 +1065,6 @@ function initLightbox() {
     mobileLightbox.addEventListener(
       "touchend",
       (e) => {
-        if (pinchActive && e.touches.length < 2) {
-          pinchActive = false;
-          mobileImage.style.transition = "transform 180ms ease";
-          applyZoom(mobileZoomScale);
-          if (mobileZoomScale <= 1.05) {
-            resetMobileLightbox();
-          }
-          return;
-        }
-
-        if (panActive) {
-          panActive = false;
-          mobileImage.style.transition = "transform 180ms ease";
-          applyZoom(mobileZoomScale);
-          return;
-        }
-
         if (!dragActive) return;
         dragActive = false;
         const touch = e.changedTouches[0];
@@ -1183,7 +1128,7 @@ function initLightbox() {
     "touchend",
     (e) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) < 40) return;
+      if (Math.abs(dx) < MOBILE_SWIPE_THRESHOLD - 30) return;
       if (dx < 0 && lbIndex < GPOSE_PHOTOS.length - 1) {
         lbIndex++;
         updateLightbox();
