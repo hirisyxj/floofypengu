@@ -336,8 +336,7 @@ body {
   width: 100%;
 }
 .lightbox-close {
-  top: 12px;
-  right: 12px;
+  display: none;
 }
 .lightbox-img-wrap {
   max-height: 90dvh;
