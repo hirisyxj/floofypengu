@@ -27,6 +27,10 @@ const SITE_DATA = {
   artworks: [
     { label: "Viera", src: "images/Floofy-Viera.png" },
     { label: "Lalafell", src: "images/Floofy-Lalafell.jpg" },
+    {
+      label: "Miqo'te",
+      src: "images/Floofy-Miqo'te.png",
+    },
   ],
   preferredJobs: [{ name: "Fisher", role: "gatherer" }],
   jobs: [
