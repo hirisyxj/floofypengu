@@ -9,20 +9,61 @@ const SITE_DATA = {
   profile: {
     name: "Floofy Pengu",
     title: "Angler of Stars",
-    pronouns: "She/Her",
+    pronouns: "They/them",
     mbti: "INFP",
-    lastUpdated: "Apr 6, 2026",
+    lastUpdated: "May 15, 2026",
     aboutMe:
       "Started in Shadowbringers and got completely hooked. I fantasia between OCs a lot, so the name you see isn’t always who I’m currently playing. You’ll usually find me fishing, raiding, or vibing at social spots around Eorzea. Outside the game, I’m into tech, crafts, and street photography. You can read about my OCs when I get around to writing and updating the lore section.",
     socials: [{ label: "X", url: "https://x.com/penguxiv" }],
   },
   ocLores: [
-    // {
-    //   name: "",
-    //   age: "",
-    //   summary:
-    //     "",
-    // },
+    {
+      name: "Floofy Pengu",
+      age: "36",
+      role: "tank",
+      status: "single",
+      themeColor: "#FDFD96",
+      details: [
+        "Lalafell · Dunesfolk",
+        "He/Him",
+        "Single",
+        "Gunbreaker",
+        "Mercenary · Tavernkeeper",
+      ],
+      summary: [
+        "Adopted into a Roegadyn merchant family in the bustling city of Ul'dah, Floofy's early years were steeped in the art of commerce. His adoption brought him into the family fold, and he quickly absorbed the family's values and business acumen. This upbringing instilled in him a deep understanding of profit and trade, and he was groomed to become a capable merchant like his adopted parents. However, as he approached the age of eighteen, Floofy made a life-altering decision to follow a different path - a life as an adventurer.",
+        "With unwavering determination, Floofy picked up a pistol he had discovered in the dusty confines of the family's storage shed and set forth into the sun-drenched realm of Eorzea. From the very beginning, he embraced the intoxicating allure of the adventurer's life, yearning for the camaraderie of kindred souls. Every step into the unknown filled his heart with boundless enthusiasm, as he eagerly anticipated the bonds he believed would be forged on this new journey. Epic battles, tantalizing tales of ancient relics, and the mystique of uncharted territories stoked a fire within him, a yearning for companions who shared his fervour.",
+        "As an adventurer, Floofy never forgot the lessons of his merchant upbringing and sought to earn some gil on the side. He ventured into the life of a mercenary, accepting daring contracts and confronting formidable foes. With each victorious mission, he not only accumulated fame and fortune but also honed his combat skills, while his reputation as a reliable and capable mercenary spread throughout Eorzea.",
+        "However, as his journey unfolded, the harsh realities of the adventuring world revealed themselves. Betrayals, deceptions, and clashing ambitions plagued the groups he joined, leading to disillusionment with the concept of camaraderie and shared purpose.",
+        "In those turbulent times, a wise mentor emerged - a grizzled veteran who had weathered Eorzea's harshest trials. Under this mentor's guidance, Floofy honed his combat skills even further, transitioning from a Machinist to a Gunbreaker, mastering the art of the gunblade. This shift marked a turning point in his journey, as his once-promising path toward forging bonds diverged into a solitary trail.",
+        "Yet, Floofy remained a man of duality. Despite his preference for solitude, his warm and charismatic demeanour endeared him to many. He became a sought-after presence in taverns scattered throughout the realm, where he could briefly savour the camaraderie of fellow adventurers. There, they exchanged tales of valour, raised tankards of ale, and shared laughter, understanding the trials and tribulations of their calling.",
+        "As the years passed and his wealth grew from his successful mercenary endeavours, Floofy carved a unique niche for himself. He founded and managed his own tavern within the adventurer's guild, situated amidst the towering spires of Ishgard. This tavern became a beloved gathering place for adventurers, travellers, and locals alike, seeking refuge, camaraderie, and the thrill of shared tales and drinks within the heart of the guild.",
+      ],
+    },
+    {
+      name: "Y'shtah Tia",
+      age: "23",
+      role: "dps",
+      status: "single",
+      themeColor: "#B2FFFF",
+      details: [
+        "Miqo'te · Seeker of the Sun",
+        "He/Him",
+        "Single",
+        "Machinist",
+        "Tavern Waiter",
+      ],
+      summary: [
+        "As a young Miqo'te, Y'shtah cared little for the traditional nomadic life of his tribe or the intricacies of Miqo'te tribal politics. He was driven by a fierce desire to establish his own tribe and become a prominent Nunh. He believed in the power of a united and strong sub-tribe under his leadership, envisioning a future where he would stand as the dominant figure.",
+        "However, Y'shtah's journey took an unexpected turn. Struggling to survive outside the protective embrace of his tribe, he resorted to theft. His nimble nature and quick wit made him an adept thief, and soon, his confidence in his abilities turned into cockiness.",
+        "One day, while attempting to steal from a bustling tavern owned by a jaded lalafell named Floofy Pengu, Y'shtah's reckless ambition led him into a confrontation with the tavern master. Floofy, wise and observant, had dealt with his fair share of thieves and troublemakers. He recognised the desperation in Y'shtah's eyes and offered him a chance to make amends.",
+        "Rather than turning Y'shtah over to the authorities, Floofy proposed a deal. He would spare Y'shtah from punishment if he agreed to work at the tavern, both to repay the stolen goods and to learn the value of honest labor. It was an offer Y'shtah couldn't refuse, as it provided him with a way out of the cycle of theft.",
+        "Over time, Y'shtah's experiences at the tavern broadened his horizons. He interacted with the diverse patrons and found himself drawn to the beauty and culture of the Au Ra. His desire to start his own tribe gradually faded away as he embraced a new path of acceptance and appreciation for different races and cultures.",
+        "At the tavern, Y'shtah's flirtatious nature became apparent. He enjoyed engaging with the patrons, charming them with his quick wit and charismatic demeanour. Floofy, recognizing Y'shtah's transformation, allowed him to flirt and socialise with the patrons as long as it didn't disrupt the peaceful atmosphere of the establishment.",
+        "While Y'shtah wasn't an adventurer by trade, he found immense value in acquiring combat skills. He realised that in the ever-changing world of Eorzea, being capable of defending oneself was a valuable asset. Therefore, he dedicated himself to learning combat as a machinist under the guidance of Floofy, who was a former machinist.",
+        "Floofy passed down not only combat skills but also knowledge of machinery and gadgets. He trusted Y'shtah with his own treasured pistol as a symbol of mentorship and solidarity. This gesture solidified their bond and the unconventional mentorship that had guided Y'shtah's journey.",
+      ],
+    },
   ],
   artworks: [
     { label: "Viera", src: "images/Floofy-Viera.png" },
@@ -160,7 +201,19 @@ const SITE_DATA = {
     defaultEnabled: false,
     volume: 0.2,
   },
-  gpose: [{ src: "gpose/ffxiv_dx11 2025-02-18 00-16-31 Ice Cream Cake.png" }],
+  gpose: [
+    { src: "gpose/ffxiv_dx11 2025-02-18 00-16-31 Ice Cream Cake.png" },
+    { src: "gpose/ffxiv_dx11 2024-05-30 07-15-43.png" },
+    { src: "gpose/ffxiv_dx11 2024-06-20 08-03-30.png" },
+    { src: "gpose/ffxiv_dx11 2024-06-26 07-17-32.png" },
+    { src: "gpose/ffxiv_dx11 2024-07-14 02-55-59 Indulgence.png" },
+    { src: "gpose/ffxiv_dx11 2024-07-26 23-34-53 Elvastagram_5.png" },
+    { src: "gpose/ffxiv_dx11 2024-12-08 08-58-49 Wifi_Simplicity1B.png" },
+    { src: "gpose/ffxiv_dx11 2024-12-10 03-35-03 Elvastagram_5.png" },
+    { src: "gpose/ffxiv_dx11 2025-02-13 14-47-34 OkamiFilm_2 copy.png" },
+    { src: "gpose/ffxiv_dx11 2025-10-03 01-52-03 Ice Cream Cake.png" },
+    { src: "gpose/ffxiv_dx11_2024-02-15_19-12-48.png" },
+  ],
 };
 
 const PROFILE_DATA = SITE_DATA.profile;
@@ -347,6 +400,14 @@ function initTabs() {
     const cur = document.querySelector(".tab-btn.active");
     if (cur) moveIndicator(cur);
   });
+
+  if (typeof ResizeObserver !== "undefined") {
+    const ro = new ResizeObserver(() => {
+      const cur = document.querySelector(".tab-btn.active");
+      if (cur) moveIndicator(cur);
+    });
+    buttons.forEach((btn) => ro.observe(btn));
+  }
 }
 
 // Artwork Switcher
@@ -364,12 +425,43 @@ function initArtworks() {
   emptyEl.style.display = "none";
   dotsEl.style.display = "";
 
+  ARTWORKS.forEach((art) => {
+    new Image().src = art.src;
+  });
+
+  let switchTimer = null;
+
   function switchTo(i) {
-    imgEl.src = ARTWORKS[i].src;
-    imgEl.style.display = "block";
+    const art = ARTWORKS[i];
     document
       .querySelectorAll(".artwork-thumb")
       .forEach((d, j) => d.classList.toggle("active", j === i));
+
+    if (imgEl.style.display === "none") {
+      imgEl.src = art.src;
+      imgEl.alt = art.label || `Artwork ${i + 1}`;
+      imgEl.style.display = "block";
+      return;
+    }
+
+    if (switchTimer !== null) clearTimeout(switchTimer);
+    imgEl.style.transition = "opacity 0.2s ease";
+    imgEl.style.opacity = "0";
+
+    switchTimer = setTimeout(() => {
+      switchTimer = null;
+      imgEl.src = art.src;
+      imgEl.alt = art.label || `Artwork ${i + 1}`;
+      const fadeIn = () => {
+        imgEl.style.opacity = "0.9";
+      };
+      if (imgEl.complete && imgEl.naturalWidth > 0) {
+        requestAnimationFrame(fadeIn);
+      } else {
+        imgEl.addEventListener("load", fadeIn, { once: true });
+        imgEl.addEventListener("error", fadeIn, { once: true });
+      }
+    }, 200);
   }
 
   ARTWORKS.forEach((art, i) => {
@@ -480,13 +572,30 @@ function renderOcLore() {
     return;
   }
 
+  const ROLE_STYLES = {
+    tank:    { color: "rgb(73, 106, 213)",  bg: "rgba(73, 106, 213, 0.06)" },
+    healer:  { color: "rgb(82, 182, 118)",  bg: "rgba(82, 182, 118, 0.06)" },
+    dps:     { color: "rgb(213, 100, 73)",  bg: "rgba(213, 100, 73, 0.06)" },
+    crafter: { color: "rgb(160, 120, 80)",  bg: "rgba(160, 120, 80, 0.06)" },
+    gatherer:{ color: "rgb(100, 160, 140)", bg: "rgba(100, 160, 140, 0.06)" },
+  };
+
   OC_LORES.forEach((entry) => {
     const card = document.createElement("article");
     card.className = "lore-card";
 
+    const roleStyle = entry.role ? ROLE_STYLES[entry.role] : null;
+    if (roleStyle) {
+      card.dataset.role = entry.role;
+      card.style.setProperty("--role-c", entry.themeColor || roleStyle.color);
+      card.style.setProperty("--role-bg", roleStyle.bg);
+    }
+
     const name = entry.name || "Unnamed OC";
     const ageRaw = String(entry.age ?? "").trim();
-    const summary = entry.summary || "";
+    const summaries = Array.isArray(entry.summary)
+      ? entry.summary.filter(Boolean)
+      : [entry.summary].filter(Boolean);
 
     const head = document.createElement("div");
     head.className = "lore-card-head";
@@ -509,21 +618,65 @@ function renderOcLore() {
     }
     head.appendChild(ageEl);
 
-    const summaryEl = document.createElement("p");
-    summaryEl.className = "lore-card-summary";
-    summaryEl.textContent = summary;
-
     card.appendChild(head);
-    card.appendChild(summaryEl);
+
+    if (entry.details?.length) {
+      const detailsEl = document.createElement("div");
+      detailsEl.className = "lore-card-details";
+      entry.details.forEach((d, i) => {
+        const tag = document.createElement("span");
+        tag.className = i === 0 ? "lore-card-detail lore-card-detail--race" : "lore-card-detail";
+        tag.textContent = d;
+        detailsEl.appendChild(tag);
+      });
+      card.appendChild(detailsEl);
+    }
+
+    if (summaries.length > 0) {
+      const p = document.createElement("p");
+      p.className = "lore-card-summary";
+      p.textContent = summaries[0];
+      card.appendChild(p);
+    }
+
+    if (summaries.length > 1) {
+      const extra = document.createElement("div");
+      extra.className = "lore-extra";
+      const inner = document.createElement("div");
+      inner.className = "lore-extra-inner";
+      summaries.slice(1).forEach((text) => {
+        const p = document.createElement("p");
+        p.className = "lore-card-summary";
+        p.textContent = text;
+        inner.appendChild(p);
+      });
+      extra.appendChild(inner);
+      card.appendChild(extra);
+
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "lore-toggle";
+      toggle.innerHTML = `<span>Read more</span><iconify-icon icon="mdi:chevron-down" aria-hidden="true"></iconify-icon>`;
+      toggle.addEventListener("click", () => {
+        const open = extra.classList.toggle("open");
+        toggle.querySelector("span").textContent = open ? "Read less" : "Read more";
+        toggle.classList.toggle("open", open);
+      });
+      card.appendChild(toggle);
+    }
 
     loreGrid.appendChild(card);
   });
+
+  const placeholder = document.createElement("div");
+  placeholder.className = "lore-placeholder";
+  placeholder.textContent = "More coming soon";
+  loreGrid.appendChild(placeholder);
 }
 
 // Music
 function initMusic() {
   if (isMobileDevice) return;
-
   const controls = $id("music-controls");
   const button = $id("music-toggle");
   const volumePopover = $id("music-volume-popover");
@@ -911,6 +1064,7 @@ function renderFC() {
 let lbIndex = 0;
 let lbClosing = false;
 let lbFadeTimer = 0;
+let lbTrigger = null;
 const LB_OPEN_FADE_MS = 280;
 const LB_CLOSE_FADE_MS = 270;
 const MOBILE_SWIPE_THRESHOLD = 70;
@@ -956,6 +1110,7 @@ function openLightbox(index) {
   const lightbox = $id("lightbox");
   window.clearTimeout(lbFadeTimer);
   lbClosing = false;
+  lbTrigger = document.activeElement;
   overlay.classList.add("active");
   overlay.style.opacity = "0";
   overlay.style.transition = `opacity ${LB_OPEN_FADE_MS}ms ease`;
@@ -966,6 +1121,7 @@ function openLightbox(index) {
     overlay.style.opacity = "1";
     lightbox.style.opacity = "1";
     lightbox.style.transform = "scale(1)";
+    if (!isMobileDevice) $id("lb-close")?.focus();
   });
   document.body.style.overflow = "hidden";
 }
@@ -991,6 +1147,8 @@ function closeLightbox() {
     lightbox.style.transform = "";
     document.body.style.overflow = "";
     lbClosing = false;
+    lbTrigger?.focus();
+    lbTrigger = null;
   }, LB_CLOSE_FADE_MS);
 }
 
@@ -1027,18 +1185,37 @@ function initLightbox() {
     let dragStartX = 0;
     let dragStartY = 0;
     let dragActive = false;
+    let dragAxis = null;
+
+    const SLIDE_MS = 200;
+    const SLIDE_EASE = `${SLIDE_MS}ms cubic-bezier(0.22, 0.61, 0.36, 1)`;
 
     const resetMobileLightbox = () => {
-      mobileLightbox.style.transition =
-        "opacity 180ms ease, transform 180ms cubic-bezier(0.22, 0.61, 0.36, 1)";
+      mobileLightbox.style.transition = `opacity ${SLIDE_MS}ms ease, transform ${SLIDE_EASE}`;
       mobileLightbox.style.opacity = "";
-      mobileLightbox.style.transform = "scale(1)";
+      mobileLightbox.style.transform = "";
     };
 
-    mobileLightbox.addEventListener("click", () => {
-      if (dragActive) return;
-      closeLightbox();
-    });
+    const navigateMobile = (dir) => {
+      const exitX = dir === "next" ? "-100%" : "100%";
+      const enterX = dir === "next" ? "100%" : "-100%";
+      mobileLightbox.style.transition = `opacity ${SLIDE_MS}ms ease, transform ${SLIDE_EASE}`;
+      mobileLightbox.style.transform = `translateX(${exitX})`;
+      mobileLightbox.style.opacity = "0";
+      setTimeout(() => {
+        if (dir === "next") lbIndex++;
+        else lbIndex--;
+        updateLightbox();
+        mobileLightbox.style.transition = "none";
+        mobileLightbox.style.transform = `translateX(${enterX})`;
+        mobileLightbox.style.opacity = "0";
+        requestAnimationFrame(() => {
+          mobileLightbox.style.transition = `opacity ${SLIDE_MS}ms ease, transform ${SLIDE_EASE}`;
+          mobileLightbox.style.transform = "";
+          mobileLightbox.style.opacity = "";
+        });
+      }, SLIDE_MS);
+    };
 
     mobileLightbox.addEventListener(
       "touchstart",
@@ -1046,6 +1223,7 @@ function initLightbox() {
         dragStartX = e.touches[0].clientX;
         dragStartY = e.touches[0].clientY;
         dragActive = true;
+        dragAxis = null;
         mobileLightbox.style.transition = "none";
       },
       { passive: true },
@@ -1055,13 +1233,19 @@ function initLightbox() {
       "touchmove",
       (e) => {
         if (!dragActive) return;
-        const touch = e.touches[0];
-        const dx = touch.clientX - dragStartX;
-        const dy = touch.clientY - dragStartY;
-        const distance = Math.hypot(dx, dy);
-        const progress = Math.min(1, distance / 120);
-        mobileLightbox.style.opacity = String(1 - progress * 0.9);
-        if (distance > 3) e.preventDefault();
+        const dx = e.touches[0].clientX - dragStartX;
+        const dy = e.touches[0].clientY - dragStartY;
+        if (!dragAxis && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+          dragAxis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+        }
+        if (dragAxis === "x") {
+          mobileLightbox.style.transform = `translateX(${dx}px)`;
+          mobileLightbox.style.opacity = String(1 - Math.min(1, Math.abs(dx) / 280) * 0.35);
+        } else if (dragAxis === "y") {
+          const progress = Math.min(1, Math.hypot(dx, dy) / 120);
+          mobileLightbox.style.opacity = String(1 - progress * 0.9);
+        }
+        if (dragAxis) e.preventDefault();
       },
       { passive: false },
     );
@@ -1071,21 +1255,26 @@ function initLightbox() {
       (e) => {
         if (!dragActive) return;
         dragActive = false;
-        const touch = e.changedTouches[0];
-        const dx = touch.clientX - dragStartX;
-        const dy = touch.clientY - dragStartY;
-        const shouldClose = Math.hypot(dx, dy) > 70;
-        if (shouldClose) {
+        const dx = e.changedTouches[0].clientX - dragStartX;
+        const dy = e.changedTouches[0].clientY - dragStartY;
+
+        if (dragAxis === "x") {
+          if (dx < -80 && lbIndex < GPOSE_PHOTOS.length - 1) navigateMobile("next");
+          else if (dx > 80 && lbIndex > 0) navigateMobile("prev");
+          else resetMobileLightbox();
+        } else if (dragAxis === "y") {
+          if (Math.hypot(dx, dy) > 70) closeLightbox();
+          else resetMobileLightbox();
+        } else {
           closeLightbox();
-          return;
         }
-        resetMobileLightbox();
       },
       { passive: true },
     );
 
     mobileLightbox.addEventListener("touchcancel", () => {
       dragActive = false;
+      dragAxis = null;
       resetMobileLightbox();
     });
 
@@ -1116,6 +1305,22 @@ function initLightbox() {
     if (e.key === "ArrowRight" && lbIndex < GPOSE_PHOTOS.length - 1) {
       lbIndex++;
       updateLightbox();
+    }
+    if (e.key === "Tab" && !isMobileDevice) {
+      const focusable = [$id("lb-prev"), $id("lb-close"), $id("lb-next")].filter(Boolean);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (!focusable.includes(document.activeElement) || document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (!focusable.includes(document.activeElement) || document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     }
   });
 
