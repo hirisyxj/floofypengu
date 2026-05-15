@@ -22,7 +22,7 @@ const SITE_DATA = {
       age: "36",
       role: "tank",
       status: "single",
-      themeColor: "#FDFD96",
+      themeColor: "#FFEE8C",
       details: [
         "Lalafell · Dunesfolk",
         "He/Him",
