@@ -1,3 +1,47 @@
+/* ── Self-hosted fonts ────────────────────────── */
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/cinzel-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/cinzel-600.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cinzel Decorative";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/cinzel-decorative-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cinzel Decorative";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/cinzel-decorative-700.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/crimson-pro-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Crimson Pro";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/crimson-pro-400-italic.ttf") format("truetype");
+}
+
 :root {
   --ember: #d05535;
   --ember-light: #f08860;
@@ -317,7 +361,7 @@ body::before {
   object-position: top center;
   display: block;
   opacity: 0.9;
-  animation: artFade 0.4s ease both;
+  transition: opacity 0.2s ease;
 }
 
 .frame-accent-tr {
@@ -356,7 +400,11 @@ body::before {
   text-transform: uppercase;
   text-align: center;
   padding: 16px;
+  background: linear-gradient(90deg, rgba(255,232,201,0.05) 25%, rgba(255,232,201,0.13) 50%, rgba(255,232,201,0.05) 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.6s ease-in-out infinite;
 }
+.artwork-empty iconify-icon { display: none; }
 
 .artwork-switcher {
   display: flex;
@@ -454,6 +502,7 @@ body::before {
 .pref-job-icon {
   width: 18px;
   height: 18px;
+  color: transparent;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
@@ -623,7 +672,9 @@ body::before {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: var(--panel);
+  background: linear-gradient(90deg, rgba(255,232,201,0.05) 25%, rgba(255,232,201,0.13) 50%, rgba(255,232,201,0.05) 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.6s ease-in-out infinite;
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -874,6 +925,7 @@ body::before {
 .job-icon {
   width: 24px;
   height: 24px;
+  color: transparent;
   object-fit: contain;
   flex-shrink: 0;
   opacity: 0.85;
@@ -1361,7 +1413,9 @@ body::before {
   position: relative;
   cursor: pointer;
   overflow: hidden;
-  background: var(--soot);
+  background: linear-gradient(90deg, rgba(255,232,201,0.05) 25%, rgba(255,232,201,0.13) 50%, rgba(255,232,201,0.05) 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.6s ease-in-out infinite;
   border: 1px solid var(--border);
   border-radius: 2px;
   transition: border-color 0.15s;
@@ -1592,6 +1646,47 @@ body::before {
 .lodestone-actions .profile-socials {
   justify-content: center;
   gap: 4px;
+}
+
+/* ── Page loader ──────────────────────────────── */
+#page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--ash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+#page-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ember-dim);
+  animation: loader-pulse 1.4s ease-in-out infinite;
+}
+@keyframes loader-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.7); }
+  50%       { opacity: 1;   transform: scale(1.4); }
+}
+@keyframes sk-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.sk-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 232, 201, 0.05) 25%,
+    rgba(255, 232, 201, 0.13) 50%,
+    rgba(255, 232, 201, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

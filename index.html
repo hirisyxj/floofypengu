@@ -15,10 +15,13 @@
     <meta name="twitter:image" content="https://floofypengu.pages.dev/images/Floofy-Viera.png" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="favicon.svg" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,400;1,400&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://code.iconify.design" crossorigin />
+    <link rel="preload" href="fonts/cinzel-400.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="fonts/cinzel-600.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="fonts/cinzel-decorative-400.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="fonts/cinzel-decorative-700.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="fonts/crimson-pro-400.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="fonts/crimson-pro-400-italic.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mobile.css" media="(max-width: 768px)" />
     <script
@@ -27,6 +30,7 @@
     ></script>
   </head>
   <body>
+    <div id="page-loader" aria-hidden="true"><div class="loader-dot"></div></div>
     <canvas id="ember-canvas"></canvas>
     <div class="music-controls" id="music-controls" style="display: none">
       <button

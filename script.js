@@ -228,7 +228,7 @@ const OC_LORES = SITE_DATA.ocLores || [];
 
 // Job Icons
 // Served from xivapi/classjob-icons
-const CDN = "https://cdn.jsdelivr.net/gh/xivapi/classjob-icons@master/icons/";
+const CDN = "images/jobs/";
 const JOB_ICONS = {
   Paladin: CDN + "paladin.png",
   Warrior: CDN + "warrior.png",
@@ -271,7 +271,6 @@ function makeJobIcon(jobName, size = "normal") {
   const img = document.createElement("img");
   img.src = src;
   img.alt = jobName;
-  img.loading = "lazy";
   img.className = size === "small" ? "pref-job-icon" : "job-icon";
   img.addEventListener(
     "error",
@@ -422,7 +421,7 @@ function initArtworks() {
     dotsEl.style.display = "none";
     return;
   }
-  emptyEl.style.display = "none";
+  // emptyEl stays visible as shimmer until first image loads
   dotsEl.style.display = "";
 
   ARTWORKS.forEach((art) => {
@@ -440,7 +439,17 @@ function initArtworks() {
     if (imgEl.style.display === "none") {
       imgEl.src = art.src;
       imgEl.alt = art.label || `Artwork ${i + 1}`;
-      imgEl.style.display = "block";
+      const reveal = () => {
+        emptyEl.style.display = "none";
+        imgEl.style.opacity = "0";
+        imgEl.style.display = "block";
+        requestAnimationFrame(() => { imgEl.style.opacity = "0.9"; });
+      };
+      if (imgEl.complete && imgEl.naturalWidth > 0) reveal();
+      else {
+        imgEl.addEventListener("load", reveal, { once: true });
+        imgEl.addEventListener("error", reveal, { once: true });
+      }
       return;
     }
 
@@ -450,9 +459,11 @@ function initArtworks() {
 
     switchTimer = setTimeout(() => {
       switchTimer = null;
+      emptyEl.style.display = "";
       imgEl.src = art.src;
       imgEl.alt = art.label || `Artwork ${i + 1}`;
       const fadeIn = () => {
+        emptyEl.style.display = "none";
         imgEl.style.opacity = "0.9";
       };
       if (imgEl.complete && imgEl.naturalWidth > 0) {
@@ -1035,14 +1046,11 @@ function renderFC() {
     img.src = fc.icon.src;
     img.alt = fc.name || "FC";
     img.style.cssText =
-      "width:100%;height:100%;object-fit:contain;border-radius:50%;";
-    img.addEventListener(
-      "error",
-      () => {
-        img.replaceWith(document.createTextNode("⚜"));
-      },
-      { once: true },
-    );
+      "width:100%;height:100%;object-fit:contain;border-radius:50%;opacity:0;transition:opacity 0.3s ease;";
+    const revealFC = () => { img.style.opacity = "1"; };
+    img.addEventListener("load", revealFC, { once: true });
+    if (img.complete && img.naturalWidth > 0) revealFC();
+    img.addEventListener("error", () => { img.replaceWith(document.createTextNode("⚜")); }, { once: true });
     iconEl.appendChild(img);
   } else {
     iconEl.textContent = "⚜";
@@ -1090,6 +1098,11 @@ function renderGpose() {
       img.src = photo.src;
       img.alt = "";
       img.loading = "lazy";
+      img.style.opacity = "0";
+      img.style.transition = "opacity 0.3s ease";
+      const revealGpose = () => { img.style.opacity = "1"; };
+      img.addEventListener("load", revealGpose, { once: true });
+      if (img.complete && img.naturalWidth > 0) revealGpose();
       item.appendChild(img);
     } else {
       const ph = document.createElement("div");
@@ -1362,3 +1375,15 @@ renderFC();
 renderGpose();
 initLightbox();
 initMusic();
+
+// Hide loader once fonts are ready + minimum display time, 3s hard cap
+const hideLoader = () => {
+  const loader = document.getElementById("page-loader");
+  if (!loader) return;
+  loader.classList.add("hidden");
+  loader.addEventListener("transitionend", () => loader.remove(), { once: true });
+};
+Promise.race([
+  Promise.all([document.fonts.ready, new Promise((r) => setTimeout(r, 600))]),
+  new Promise((r) => setTimeout(r, 3000)),
+]).then(hideLoader);
