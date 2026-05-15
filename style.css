@@ -1648,32 +1648,7 @@ body::before {
   gap: 4px;
 }
 
-/* ── Page loader ──────────────────────────────── */
-#page-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: var(--ash);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.5s ease;
-}
-#page-loader.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-.loader-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ember-dim);
-  animation: loader-pulse 1.4s ease-in-out infinite;
-}
-@keyframes loader-pulse {
-  0%, 100% { opacity: 0.2; transform: scale(0.7); }
-  50%       { opacity: 1;   transform: scale(1.4); }
-}
+
 @keyframes sk-shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }

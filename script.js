@@ -66,12 +66,9 @@ const SITE_DATA = {
     },
   ],
   artworks: [
-    { label: "Viera", src: "images/Floofy-Viera.png" },
-    { label: "Lalafell", src: "images/Floofy-Lalafell.jpg" },
-    {
-      label: "Miqo'te",
-      src: "images/Floofy-Miqo'te.png",
-    },
+    { label: "Viera", src: "images/Floofy-Viera.webp" },
+    { label: "Lalafell", src: "images/Floofy-Lalafell.webp" },
+    { label: "Miqo'te", src: "images/Floofy-Miqo'te.webp" },
   ],
   preferredJobs: [{ name: "Fisher", role: "gatherer" }],
   jobs: [
@@ -185,7 +182,7 @@ const SITE_DATA = {
     },
   ],
   fc: {
-    icon: { src: "images/FC-Logo.png" },
+    icon: { src: "images/FC-Logo.webp" },
     name: "Floofy Pancakes",
     tag: "CAKE",
     lodestoneUrl:
@@ -202,17 +199,17 @@ const SITE_DATA = {
     volume: 0.2,
   },
   gpose: [
-    { src: "gpose/ffxiv_dx11 2025-02-18 00-16-31 Ice Cream Cake.png" },
-    { src: "gpose/ffxiv_dx11 2024-05-30 07-15-43.png" },
-    { src: "gpose/ffxiv_dx11 2024-06-20 08-03-30.png" },
-    { src: "gpose/ffxiv_dx11 2024-06-26 07-17-32.png" },
-    { src: "gpose/ffxiv_dx11 2024-07-14 02-55-59 Indulgence.png" },
-    { src: "gpose/ffxiv_dx11 2024-07-26 23-34-53 Elvastagram_5.png" },
-    { src: "gpose/ffxiv_dx11 2024-12-08 08-58-49 Wifi_Simplicity1B.png" },
-    { src: "gpose/ffxiv_dx11 2024-12-10 03-35-03 Elvastagram_5.png" },
-    { src: "gpose/ffxiv_dx11 2025-02-13 14-47-34 OkamiFilm_2 copy.png" },
-    { src: "gpose/ffxiv_dx11 2025-10-03 01-52-03 Ice Cream Cake.png" },
-    { src: "gpose/ffxiv_dx11_2024-02-15_19-12-48.png" },
+    { src: "gpose/ffxiv_dx11 2025-02-18 00-16-31 Ice Cream Cake.webp" },
+    { src: "gpose/ffxiv_dx11 2024-05-30 07-15-43.webp" },
+    { src: "gpose/ffxiv_dx11 2024-06-20 08-03-30.webp" },
+    { src: "gpose/ffxiv_dx11 2024-06-26 07-17-32.webp" },
+    { src: "gpose/ffxiv_dx11 2024-07-14 02-55-59 Indulgence.webp" },
+    { src: "gpose/ffxiv_dx11 2024-07-26 23-34-53 Elvastagram_5.webp" },
+    { src: "gpose/ffxiv_dx11 2024-12-08 08-58-49 Wifi_Simplicity1B.webp" },
+    { src: "gpose/ffxiv_dx11 2024-12-10 03-35-03 Elvastagram_5.webp" },
+    { src: "gpose/ffxiv_dx11 2025-02-13 14-47-34 OkamiFilm_2 copy.webp" },
+    { src: "gpose/ffxiv_dx11 2025-10-03 01-52-03 Ice Cream Cake.webp" },
+    { src: "gpose/ffxiv_dx11_2024-02-15_19-12-48.webp" },
   ],
 };
 
@@ -387,6 +384,7 @@ function initTabs() {
       btn.classList.add("active");
       $id(`panel-${btn.dataset.tab}`)?.classList.add("active");
       moveIndicator(btn);
+      if (btn.dataset.tab === "gpose") loadGposeImages();
     });
   });
 
@@ -1078,6 +1076,14 @@ const LB_CLOSE_FADE_MS = 270;
 const MOBILE_SWIPE_THRESHOLD = 70;
 const MOBILE_SWIPE_DISTANCE = 120;
 
+function loadGposeImages() {
+  document.querySelectorAll("#gpose-grid img[data-src]").forEach((img) => {
+    img.src = img.dataset.src;
+    img.removeAttribute("data-src");
+    if (img.complete && img.naturalWidth > 0) img.style.opacity = "1";
+  });
+}
+
 function renderGpose() {
   const grid = $id("gpose-grid");
   if (!GPOSE_PHOTOS.length) {
@@ -1095,14 +1101,13 @@ function renderGpose() {
 
     if (photo.src) {
       const img = document.createElement("img");
-      img.src = photo.src;
+      img.dataset.src = photo.src;
       img.alt = "";
-      img.loading = "lazy";
+      img.decoding = "async";
       img.style.opacity = "0";
       img.style.transition = "opacity 0.3s ease";
       const revealGpose = () => { img.style.opacity = "1"; };
       img.addEventListener("load", revealGpose, { once: true });
-      if (img.complete && img.naturalWidth > 0) revealGpose();
       item.appendChild(img);
     } else {
       const ph = document.createElement("div");
@@ -1376,14 +1381,3 @@ renderGpose();
 initLightbox();
 initMusic();
 
-// Hide loader once fonts are ready + minimum display time, 3s hard cap
-const hideLoader = () => {
-  const loader = document.getElementById("page-loader");
-  if (!loader) return;
-  loader.classList.add("hidden");
-  loader.addEventListener("transitionend", () => loader.remove(), { once: true });
-};
-Promise.race([
-  Promise.all([document.fonts.ready, new Promise((r) => setTimeout(r, 600))]),
-  new Promise((r) => setTimeout(r, 3000)),
-]).then(hideLoader);
