@@ -46,11 +46,12 @@
   --ember: #d05535;
   --ember-light: #f08860;
   --ember-dim: #b06040;
+  --ember-rgb: 208, 85, 53;
   --ash: #100d0e;
   --panel: #100e0f;
   --soot: #1c1618;
-  --border: rgba(200, 75, 47, 0.2);
-  --border-warm: rgba(200, 75, 47, 0.5);
+  --border: rgba(var(--ember-rgb), 0.2);
+  --border-warm: rgba(var(--ember-rgb), 0.5);
   --text: #d8ccbc;
   --text-dim: #9a8a78;
   --tank-c: rgb(73, 106, 213);
@@ -134,10 +135,10 @@
 @keyframes musicHintPulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(208, 85, 53, 0.32);
+    box-shadow: 0 0 0 0 rgba(var(--ember-rgb), 0.32);
   }
   50% {
-    box-shadow: 0 0 0 9px rgba(208, 85, 53, 0);
+    box-shadow: 0 0 0 9px rgba(var(--ember-rgb), 0);
   }
 }
 
@@ -148,6 +149,7 @@ body {
   font-size: 18px;
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background-color 0.5s ease;
 }
 
 body::before {
@@ -159,17 +161,17 @@ body::before {
   background:
     radial-gradient(
       ellipse 60% 38% at 10% 100%,
-      rgba(200, 75, 47, 0.11) 0%,
+      rgba(var(--ember-rgb), 0.11) 0%,
       transparent 60%
     ),
     radial-gradient(
       ellipse 50% 32% at 90% 100%,
-      rgba(200, 75, 47, 0.07) 0%,
+      rgba(var(--ember-rgb), 0.07) 0%,
       transparent 55%
     ),
     radial-gradient(
       ellipse 80% 50% at 50% 115%,
-      rgba(100, 20, 5, 0.2) 0%,
+      rgba(var(--ember-rgb), 0.18) 0%,
       transparent 60%
     );
 }
@@ -222,13 +224,13 @@ body::before {
     background-color 0.15s;
 }
 .music-controls.attention .music-toggle {
-  border: 1px solid rgba(208, 85, 53, 0.75);
-  background: rgba(208, 85, 53, 0.14);
+  border: 1px solid rgba(var(--ember-rgb), 0.75);
+  background: rgba(var(--ember-rgb), 0.14);
   animation: musicHintPulse 3.2s ease-in-out infinite;
 }
 .music-toggle[aria-pressed="false"] {
-  border: 1px solid rgba(208, 85, 53, 0.75);
-  background: rgba(208, 85, 53, 0.14);
+  border: 1px solid rgba(var(--ember-rgb), 0.75);
+  background: rgba(var(--ember-rgb), 0.14);
   animation: musicHintPulse 3.2s ease-in-out infinite;
 }
 .music-toggle iconify-icon {
@@ -445,7 +447,7 @@ body::before {
   border-color: var(--ember);
   color: var(--ember-light);
   background: rgba(35, 26, 28, 0.95);
-  box-shadow: inset 0 0 0 1px rgba(208, 85, 53, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(var(--ember-rgb), 0.2);
 }
 .artwork-thumb-label {
   font-size: 10px;
@@ -569,7 +571,7 @@ body::before {
   align-items: center;
   justify-content: center;
   background: rgba(28, 22, 24, 0.95);
-  border: 1px solid rgba(200, 75, 47, 0.2);
+  border: 1px solid rgba(var(--ember-rgb), 0.2);
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -593,7 +595,7 @@ body::before {
   border-color: var(--border-warm);
   background: rgba(35, 26, 28, 1);
   transform: translateY(-1px);
-  box-shadow: 0 0 0 1px rgba(208, 85, 53, 0.15);
+  box-shadow: 0 0 0 1px rgba(var(--ember-rgb), 0.15);
 }
 .social-link[data-label]::after {
   content: attr(data-label);
@@ -759,7 +761,7 @@ body::before {
 }
 .tab-btn.active {
   color: var(--ember-light);
-  background: rgba(208, 85, 53, 0.08);
+  background: rgba(var(--ember-rgb), 0.08);
 }
 .tab-btn.active iconify-icon {
   opacity: 1;
@@ -825,7 +827,7 @@ body::before {
   background: var(--heal-c);
 }
 .role-pip.dps {
-  background: var(--ember);
+  background: var(--dps-c);
 }
 .role-pip.crafter {
   background: var(--craft-c);
@@ -850,7 +852,7 @@ body::before {
   color: var(--heal-c);
 }
 .role-label.dps {
-  color: var(--ember-light);
+  color: var(--dps-c);
 }
 .role-label.crafter {
   color: var(--craft-c);
@@ -904,7 +906,7 @@ body::before {
   background: var(--heal-c);
 }
 .job-row.dps::before {
-  background: var(--ember);
+  background: var(--dps-c);
 }
 .job-row.crafter::before {
   background: var(--craft-c);
@@ -966,7 +968,7 @@ body::before {
   background: linear-gradient(to right, #1e5535, var(--heal-c));
 }
 .job-row.dps .job-bar-fill {
-  background: linear-gradient(to right, var(--ember-dim), var(--ember-light));
+  background: linear-gradient(to right, #b06040, var(--dps-c));
 }
 .job-row.crafter .job-bar-fill {
   background: linear-gradient(to right, #3a2060, var(--craft-c));
@@ -992,7 +994,7 @@ body::before {
   color: var(--heal-c);
 }
 .job-row.dps .job-level {
-  color: var(--ember-light);
+  color: var(--dps-c);
 }
 .job-row.crafter .job-level {
   color: var(--craft-c);
@@ -1036,7 +1038,7 @@ body::before {
   background: #e8c090;
 }
 .pip-savage {
-  background: var(--ember);
+  background: #d05535;
 }
 .pip-chaotic {
   background: #9a7bc4;
@@ -1061,7 +1063,7 @@ body::before {
   color: #e8c090;
 }
 .title-savage {
-  color: var(--ember-light);
+  color: #f08860;
 }
 .title-chaotic {
   color: #b49ad4;
@@ -1178,7 +1180,7 @@ body::before {
   border-radius: 1px;
 }
 .card-badge.cleared {
-  color: var(--ember-light);
+  color: #f08860;
   border-color: rgba(200, 75, 47, 0.55);
   background: rgba(200, 75, 47, 0.08);
 }
@@ -1584,7 +1586,7 @@ body::before {
   width: 100%;
   margin-top: 48px;
   padding-top: 14px;
-  border-top: 1px solid rgba(200, 75, 47, 0.12);
+  border-top: 1px solid rgba(var(--ember-rgb), 0.12);
 }
 .footer-left {
   display: flex;
@@ -1629,7 +1631,7 @@ body::before {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(172, 152, 130, 0.64);
-  border-left: 1px solid rgba(200, 75, 47, 0.2);
+  border-left: 1px solid rgba(var(--ember-rgb), 0.2);
   padding-left: 10px;
 }
 .lodestone-actions {

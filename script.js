@@ -11,7 +11,7 @@ const SITE_DATA = {
     title: "Angler of Stars",
     pronouns: "They/them",
     mbti: "INFP",
-    lastUpdated: "May 15, 2026",
+    lastUpdated: "June 6, 2026",
     aboutMe:
       "Started in Shadowbringers and got completely hooked. I fantasia between OCs a lot, so the name you see isn’t always who I’m currently playing. You’ll usually find me fishing, raiding, or vibing at social spots around Eorzea. Outside the game, I’m into tech, crafts, and street photography. You can read about my OCs when I get around to writing and updating the lore section.",
     socials: [{ label: "X", url: "https://x.com/penguxiv" }],
@@ -66,9 +66,48 @@ const SITE_DATA = {
     },
   ],
   artworks: [
-    { label: "Viera", src: "images/Floofy-Viera.webp" },
-    { label: "Lalafell", src: "images/Floofy-Lalafell.webp" },
-    { label: "Miqo'te", src: "images/Floofy-Miqo'te.webp" },
+    {
+      label: "Viera",
+      src: "images/Floofy-Viera.webp",
+      theme: {
+        ember: "#d05535",
+        emberLight: "#f08860",
+        emberDim: "#b06040",
+        emberRgb: "208, 85, 53",
+        ash: "#100d0e",
+        panel: "#100e0f",
+        soot: "#1c1618",
+        hue: [0, 22],
+      },
+    },
+    {
+      label: "Lalafell",
+      src: "images/Floofy-Lalafell.webp",
+      theme: {
+        ember: "#b88020",
+        emberLight: "#f0c870",
+        emberDim: "#886010",
+        emberRgb: "184, 128, 32",
+        ash: "#0d0c09",
+        panel: "#0e0d0a",
+        soot: "#19180e",
+        hue: [38, 55],
+      },
+    },
+    {
+      label: "Miqo'te",
+      src: "images/Floofy-Miqo'te.webp",
+      theme: {
+        ember: "#1aa8b8",
+        emberLight: "#70dce8",
+        emberDim: "#107888",
+        emberRgb: "26, 168, 184",
+        ash: "#080e10",
+        panel: "#090f12",
+        soot: "#0e1820",
+        hue: [175, 195],
+      },
+    },
   ],
   preferredJobs: [{ name: "Fisher", role: "gatherer" }],
   jobs: [
@@ -78,9 +117,9 @@ const SITE_DATA = {
     { name: "Dark Knight", role: "tank", level: 100 },
     { name: "Gunbreaker", role: "tank", level: 100 },
     // Healers
-    { name: "White Mage", role: "healer", level: 5 },
+    { name: "White Mage", role: "healer", level: 50 },
     { name: "Scholar", role: "healer", level: 100 },
-    { name: "Astrologian", role: "healer", level: 80 },
+    { name: "Astrologian", role: "healer", level: 100 },
     { name: "Sage", role: "healer", level: 100 },
     // Melee DPS
     { name: "Monk", role: "dps", level: 100 },
@@ -280,6 +319,8 @@ function makeJobIcon(jobName, size = "normal") {
 }
 
 // Ember Particles
+let emberHue = { min: 0, max: 22 };
+
 (function () {
   const canvas = document.getElementById("ember-canvas");
   const ctx = canvas.getContext("2d");
@@ -306,7 +347,7 @@ function makeJobIcon(jobName, size = "normal") {
       life: 1,
       decay: rand(0.005, 0.011),
       size: rand(0.9, 2.2),
-      hue: rand(0, 22),
+      hue: rand(emberHue.min, emberHue.max),
     };
   }
 
@@ -407,6 +448,23 @@ function initTabs() {
   }
 }
 
+// Theme switcher
+function applyTheme(theme) {
+  if (!theme) return;
+  const r = document.documentElement;
+  r.style.setProperty("--ember", theme.ember);
+  r.style.setProperty("--ember-light", theme.emberLight);
+  r.style.setProperty("--ember-dim", theme.emberDim);
+  r.style.setProperty("--ember-rgb", theme.emberRgb);
+  r.style.setProperty("--ash", theme.ash);
+  r.style.setProperty("--panel", theme.panel);
+  r.style.setProperty("--soot", theme.soot);
+  if (theme.hue) {
+    emberHue.min = theme.hue[0];
+    emberHue.max = theme.hue[1];
+  }
+}
+
 // Artwork Switcher
 function initArtworks() {
   const dotsEl = $id("artwork-dots");
@@ -430,6 +488,7 @@ function initArtworks() {
 
   function switchTo(i) {
     const art = ARTWORKS[i];
+    applyTheme(art.theme);
     document
       .querySelectorAll(".artwork-thumb")
       .forEach((d, j) => d.classList.toggle("active", j === i));
@@ -441,7 +500,9 @@ function initArtworks() {
         emptyEl.style.display = "none";
         imgEl.style.opacity = "0";
         imgEl.style.display = "block";
-        requestAnimationFrame(() => { imgEl.style.opacity = "0.9"; });
+        requestAnimationFrame(() => {
+          imgEl.style.opacity = "0.9";
+        });
       };
       if (imgEl.complete && imgEl.naturalWidth > 0) reveal();
       else {
@@ -582,11 +643,11 @@ function renderOcLore() {
   }
 
   const ROLE_STYLES = {
-    tank:    { color: "rgb(73, 106, 213)",  bg: "rgba(73, 106, 213, 0.06)" },
-    healer:  { color: "rgb(82, 182, 118)",  bg: "rgba(82, 182, 118, 0.06)" },
-    dps:     { color: "rgb(213, 100, 73)",  bg: "rgba(213, 100, 73, 0.06)" },
-    crafter: { color: "rgb(160, 120, 80)",  bg: "rgba(160, 120, 80, 0.06)" },
-    gatherer:{ color: "rgb(100, 160, 140)", bg: "rgba(100, 160, 140, 0.06)" },
+    tank: { color: "rgb(73, 106, 213)", bg: "rgba(73, 106, 213, 0.06)" },
+    healer: { color: "rgb(82, 182, 118)", bg: "rgba(82, 182, 118, 0.06)" },
+    dps: { color: "rgb(213, 100, 73)", bg: "rgba(213, 100, 73, 0.06)" },
+    crafter: { color: "rgb(160, 120, 80)", bg: "rgba(160, 120, 80, 0.06)" },
+    gatherer: { color: "rgb(100, 160, 140)", bg: "rgba(100, 160, 140, 0.06)" },
   };
 
   OC_LORES.forEach((entry) => {
@@ -634,7 +695,10 @@ function renderOcLore() {
       detailsEl.className = "lore-card-details";
       entry.details.forEach((d, i) => {
         const tag = document.createElement("span");
-        tag.className = i === 0 ? "lore-card-detail lore-card-detail--race" : "lore-card-detail";
+        tag.className =
+          i === 0
+            ? "lore-card-detail lore-card-detail--race"
+            : "lore-card-detail";
         tag.textContent = d;
         detailsEl.appendChild(tag);
       });
@@ -668,7 +732,9 @@ function renderOcLore() {
       toggle.innerHTML = `<span>Read more</span><iconify-icon icon="mdi:chevron-down" aria-hidden="true"></iconify-icon>`;
       toggle.addEventListener("click", () => {
         const open = extra.classList.toggle("open");
-        toggle.querySelector("span").textContent = open ? "Read less" : "Read more";
+        toggle.querySelector("span").textContent = open
+          ? "Read less"
+          : "Read more";
         toggle.classList.toggle("open", open);
       });
       card.appendChild(toggle);
@@ -1045,10 +1111,18 @@ function renderFC() {
     img.alt = fc.name || "FC";
     img.style.cssText =
       "width:100%;height:100%;object-fit:contain;border-radius:50%;opacity:0;transition:opacity 0.3s ease;";
-    const revealFC = () => { img.style.opacity = "1"; };
+    const revealFC = () => {
+      img.style.opacity = "1";
+    };
     img.addEventListener("load", revealFC, { once: true });
     if (img.complete && img.naturalWidth > 0) revealFC();
-    img.addEventListener("error", () => { img.replaceWith(document.createTextNode("⚜")); }, { once: true });
+    img.addEventListener(
+      "error",
+      () => {
+        img.replaceWith(document.createTextNode("⚜"));
+      },
+      { once: true },
+    );
     iconEl.appendChild(img);
   } else {
     iconEl.textContent = "⚜";
@@ -1106,7 +1180,9 @@ function renderGpose() {
       img.decoding = "async";
       img.style.opacity = "0";
       img.style.transition = "opacity 0.3s ease";
-      const revealGpose = () => { img.style.opacity = "1"; };
+      const revealGpose = () => {
+        img.style.opacity = "1";
+      };
       img.addEventListener("load", revealGpose, { once: true });
       item.appendChild(img);
     } else {
@@ -1258,7 +1334,9 @@ function initLightbox() {
         }
         if (dragAxis === "x") {
           mobileLightbox.style.transform = `translateX(${dx}px)`;
-          mobileLightbox.style.opacity = String(1 - Math.min(1, Math.abs(dx) / 280) * 0.35);
+          mobileLightbox.style.opacity = String(
+            1 - Math.min(1, Math.abs(dx) / 280) * 0.35,
+          );
         } else if (dragAxis === "y") {
           const progress = Math.min(1, Math.hypot(dx, dy) / 120);
           mobileLightbox.style.opacity = String(1 - progress * 0.9);
@@ -1277,7 +1355,8 @@ function initLightbox() {
         const dy = e.changedTouches[0].clientY - dragStartY;
 
         if (dragAxis === "x") {
-          if (dx < -80 && lbIndex < GPOSE_PHOTOS.length - 1) navigateMobile("next");
+          if (dx < -80 && lbIndex < GPOSE_PHOTOS.length - 1)
+            navigateMobile("next");
           else if (dx > 80 && lbIndex > 0) navigateMobile("prev");
           else resetMobileLightbox();
         } else if (dragAxis === "y") {
@@ -1325,16 +1404,26 @@ function initLightbox() {
       updateLightbox();
     }
     if (e.key === "Tab" && !isMobileDevice) {
-      const focusable = [$id("lb-prev"), $id("lb-close"), $id("lb-next")].filter(Boolean);
+      const focusable = [
+        $id("lb-prev"),
+        $id("lb-close"),
+        $id("lb-next"),
+      ].filter(Boolean);
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (e.shiftKey) {
-        if (!focusable.includes(document.activeElement) || document.activeElement === first) {
+        if (
+          !focusable.includes(document.activeElement) ||
+          document.activeElement === first
+        ) {
           e.preventDefault();
           last.focus();
         }
       } else {
-        if (!focusable.includes(document.activeElement) || document.activeElement === last) {
+        if (
+          !focusable.includes(document.activeElement) ||
+          document.activeElement === last
+        ) {
           e.preventDefault();
           first.focus();
         }
@@ -1380,4 +1469,3 @@ renderFC();
 renderGpose();
 initLightbox();
 initMusic();
-
