@@ -237,6 +237,7 @@ const SITE_DATA = {
     defaultEnabled: false,
     volume: 0.2,
   },
+  gposeVideo: "gpose/mylove.webm",
   gpose: [
     { src: "gpose/ffxiv_dx11 2025-02-18 00-16-31 Ice Cream Cake.webp" },
     { src: "gpose/ffxiv_dx11 2024-05-30 07-15-43.webp" },
@@ -1156,9 +1157,30 @@ function loadGposeImages() {
     img.removeAttribute("data-src");
     if (img.complete && img.naturalWidth > 0) img.style.opacity = "1";
   });
+  const vid = document.querySelector(".gpose-video-card video[data-src]");
+  if (vid) {
+    vid.src = vid.dataset.src;
+    vid.removeAttribute("data-src");
+    vid.load();
+    vid.play().catch(() => {});
+  }
 }
 
 function renderGpose() {
+  const gposeVideo = (SITE_DATA.gposeVideo || "").trim();
+  if (gposeVideo) {
+    const panel = $id("panel-gpose");
+    const videoWrap = document.createElement("div");
+    videoWrap.className = "gpose-video-card";
+    const video = document.createElement("video");
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.dataset.src = gposeVideo;
+    videoWrap.appendChild(video);
+    panel.insertBefore(videoWrap, panel.firstChild);
+  }
+
   const grid = $id("gpose-grid");
   if (!GPOSE_PHOTOS.length) {
     grid.classList.add("gpose-grid-empty");
